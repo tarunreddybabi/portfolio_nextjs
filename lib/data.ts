@@ -76,20 +76,98 @@ export const skillGroups = [
 export const projects = [
   {
     name: "Expodite",
-    label: "01 / Enterprise SaaS",
+    label: "Multi-Tenant Export Management Platform",
+    accent: "violet",
+
     description:
-      "A multi-tenant export management platform focused on shipment operations, document automation, configurable workflows, dashboards, and enterprise data flows.",
-    tech: ["React.js", "Node.js", "Express.js", "PostgreSQL", "Redis"],
-    accent: "violet"
+      "A cloud-based SaaS platform for managing export operations, shipments, and business workflows. Built with a multi-tenant architecture, REST APIs, dashboards, and secure authentication.",
+
+    overview:
+      "Expodite is a multi-tenant enterprise SaaS platform built to manage export operations. The platform provides shipment management, configurable business workflows, document automation, dashboards, and organization-specific data isolation.",
+
+    responsibilities: [
+      "Developed end-to-end full-stack features using React.js, Node.js, Express.js, and PostgreSQL.",
+      "Designed and developed scalable REST APIs for shipment management, workflows, dashboards, and document automation.",
+      "Built reusable React.js components, forms, dashboards, and API integrations.",
+      "Developed Dynamic Document Builder and Dynamic Form Builder for configurable business workflows.",
+      "Implemented JWT and OAuth 2.0 authentication and authorization.",
+      "Worked on multi-tenant architecture with isolated databases and a shared application codebase.",
+      "Developed shipment tracking, dashboard, and business workflow features.",
+      "Implemented Excel export, email template generation, and document download functionality.",
+      "Improved performance using Redis caching and PostgreSQL query optimization.",
+    ],
+
+    features: [
+      "Multi-tenant architecture",
+      "Shipment management",
+      "Dynamic Document Builder",
+      "Dynamic Form Builder",
+      "Business workflow automation",
+      "Document automation",
+      "Dashboard & shipment tracking",
+      "Excel export",
+      "Email template generation",
+      "Document downloads",
+      "JWT authentication",
+      "OAuth 2.0 authorization",
+    ],
+
+    tech: [
+      "React.js",
+      "JavaScript",
+      "Node.js",
+      "Express.js",
+      "PostgreSQL",
+      "Redis",
+      "REST APIs",
+      "JWT",
+      "OAuth 2.0",
+    ],
   },
+
   {
     name: "Tellida",
-    label: "02 / Product Platform",
+    label: "Project Management & Estimation Platform",
+    accent: "cyan",
+
     description:
-      "A project management and estimation platform spanning planning, RFPs, resource allocation, subscriptions, onboarding, and AI-powered proposal generation.",
-    tech: ["Next.js", "React.js", "Redux", "Tailwind CSS", "Shadcn UI"],
-    accent: "cyan"
-  }
+      "A web-based project management and estimation platform designed to streamline project planning, RFP management, resource allocation, proposal generation, and subscription management.",
+
+    overview:
+      "Tellida is a project management and estimation platform focused on simplifying project planning, estimation workflows, RFP management, resource allocation, proposal generation, and subscription management through a scalable and intuitive interface.",
+
+    responsibilities: [
+      "Developed reusable UI components using Next.js, React.js, and Redux.",
+      "Built GraphQL-based modules for project planning and estimation workflows.",
+      "Implemented authentication, role-based access control, and user onboarding.",
+      "Integrated Razorpay payment gateway for subscription management.",
+      "Developed AI-powered proposal generation using ChatGPT-4.",
+      "Collaborated with backend developers to integrate GraphQL APIs.",
+      "Delivered responsive user experiences across project management workflows.",
+    ],
+
+    features: [
+      "Dynamic project dashboards",
+      "Project estimation workflows",
+      "RFP management",
+      "Resource allocation",
+      "User & client onboarding",
+      "Role-based access control",
+      "Razorpay subscription payments",
+      "AI-powered proposal generation",
+    ],
+
+    tech: [
+      "Next.js",
+      "React.js",
+      "Redux",
+      "Tailwind CSS",
+      "Shadcn UI",
+      "GraphQL",
+      "Razorpay",
+      "ChatGPT-4",
+    ],
+  },
 ] as const;
 
 export const education = {

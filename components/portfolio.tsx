@@ -80,6 +80,10 @@ export default function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [sent, setSent] = useState(false);
   const [activeRole, setActiveRole] = useState(0);
+  const [selectedProject, setSelectedProject] = useState<
+    typeof projects[number] | null
+  >(null);
+
   const roles = ["Full Stack Developer", "Software Engineer", "SaaS Builder"];
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
@@ -480,7 +484,10 @@ export default function Portfolio() {
           <div className="mt-12 grid gap-5 lg:grid-cols-2">
             {projects.map((project, i) => (
               <Reveal key={project.name}>
-                <article className="group relative min-h-[390px] overflow-hidden rounded-[2rem] border border-white/10 bg-[#0d0d14] p-7 transition duration-500 hover:-translate-y-1 hover:border-white/20 sm:p-9">
+                <article
+                  onClick={() => setSelectedProject(project)}
+                  className="group relative min-h-[390px] overflow-hidden rounded-[2rem] border border-white/10 bg-[#0d0d14] p-7 transition duration-500 hover:-translate-y-1 hover:border-white/20 sm:p-9"
+                >
                   <div
                     className={`absolute -right-24 -top-24 size-72 rounded-full blur-3xl ${
                       project.accent === "violet"
@@ -493,9 +500,9 @@ export default function Portfolio() {
                       <span className="text-xs font-semibold uppercase tracking-[.2em] text-zinc-600">
                         {project.label}
                       </span>
-                      <ExternalLink
-                        size={17}
-                        className="text-zinc-600 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white"
+                      <ChevronRight
+                        size={16}
+                        className="transition-transform group-hover:translate-x-1"
                       />
                     </div>
                     <div className="mt-auto pt-20">
@@ -723,6 +730,117 @@ export default function Portfolio() {
           </div>
         </div>
       </footer>
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-5 backdrop-blur-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedProject(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 30, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.96 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              onClick={(event) => event.stopPropagation()}
+              className="relative max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-[2rem] border border-white/10 bg-[#0d0d14] shadow-2xl shadow-black/50"
+            >
+              {/* Header */}
+              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/[.06] bg-[#0d0d14]/95 px-6 py-5 backdrop-blur-xl sm:px-8">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[.2em] text-violet-300">
+                    {selectedProject.label}
+                  </p>
+
+                  <h2 className="mt-2 text-2xl font-black tracking-tight text-white sm:text-3xl">
+                    {selectedProject.name}
+                  </h2>
+                </div>
+
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="rounded-full border border-white/10 bg-white/[.04] p-2.5 text-zinc-400 transition hover:border-white/20 hover:bg-white/[.08] hover:text-white"
+                  aria-label="Close project details"
+                >
+                  <X size={19} />
+                </button>
+              </div>
+
+              {/* Content */}
+              <div className="p-6 sm:p-8">
+                {/* Project intro */}
+                <div className="rounded-3xl border border-white/[.07] bg-white/[.025] p-6">
+                  <p className="text-base leading-8 text-zinc-300">
+                    {selectedProject.description}
+                  </p>
+                </div>
+
+                {/* Technology */}
+                <div className="mt-8">
+                  <h3 className="text-xs font-semibold uppercase tracking-[.2em] text-zinc-600">
+                    Technologies
+                  </h3>
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {selectedProject.tech.map((tech) => (
+                      <span
+                        key={tech}
+                        className="rounded-full border border-white/10 bg-white/[.04] px-3 py-1.5 text-xs text-zinc-300"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Project details */}
+                <div className="mt-8 grid gap-5 sm:grid-cols-2">
+                  <div className="rounded-3xl border border-white/[.07] bg-white/[.025] p-6">
+                    <div className="mb-4 flex items-center gap-2">
+                      <Layers3 size={17} className="text-violet-300" />
+                      <h3 className="font-semibold text-white">
+                        Project Overview
+                      </h3>
+                    </div>
+
+                    <p className="text-sm leading-7 text-zinc-500">
+                      A production-focused application designed to solve complex
+                      business workflows with scalable architecture, responsive
+                      interfaces, and reliable backend services.
+                    </p>
+                  </div>
+
+                  <div className="rounded-3xl border border-white/[.07] bg-white/[.025] p-6">
+                    <div className="mb-4 flex items-center gap-2">
+                      <Code2 size={17} className="text-cyan-300" />
+                      <h3 className="font-semibold text-white">
+                        Technical Focus
+                      </h3>
+                    </div>
+
+                    <p className="text-sm leading-7 text-zinc-500">
+                      Full-stack development, API design, database architecture,
+                      performance optimization, and polished user interfaces.
+                    </p>
+                  </div>
+                </div>
+
+                {/* CTA */}
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="rounded-full border border-white/10 bg-white/[.04] px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/[.08]"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
